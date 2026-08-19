@@ -10,19 +10,26 @@ from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
 
 # Load environment variables from .env file
-load_dotenv()
+#set os to windows
+
+env_path = Path("C:/Users/yadagiri.naini/sources/aiops/genaiops/.env")#load_dotenv(env_path)
+
+
 
 def interact_with_agent():
     """Start an interactive chat session with the Trail Guide Agent."""
-    
+    print(f"Loading environment variables from .env file...")
+    AZURE_AI_PROJECT_ENDPOINT = "https://ai-account-svjmdnobmzv36.services.ai.azure.com/api/projects/ai-project-my-dev-trail-guide"
+    print(f"AZURE_AI_PROJECT_ENDPOINT: {AZURE_AI_PROJECT_ENDPOINT}")
+    print(f"AGENT_NAME: {os.getenv('AGENT_NAME', 'trail-guide-v1')}")
     # Initialize project client
     project_client = AIProjectClient(
-        endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
+        endpoint=AZURE_AI_PROJECT_ENDPOINT,
         credential=DefaultAzureCredential(),
     )
     
     # Get agent name from environment or use default
-    agent_name = os.getenv("AGENT_NAME", "trail-guide-v1")
+    agent_name = os.getenv("AGENT_NAME", "trail-guide")
 
     openai_client = project_client.get_openai_client()
     

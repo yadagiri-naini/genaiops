@@ -44,7 +44,7 @@ chat_client = project_client.get_openai_client(api_version="2024-10-21")
 messages=[
     { 
         "role": "system", 
-        "content": "You are an AI assistant that acts as a travel guide." 
+        "content": "You are an experienced AI assistant that acts as a travel guide." 
     },
     { 
         "role": "user", 
